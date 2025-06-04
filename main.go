@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 const (
@@ -22,6 +23,10 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "test" {
+		fmt.Println("[+] Container built successfully")
+		return
+	}
 	http.HandleFunc("/", HomePage)
 	log.Println("[+] Hope the pipeline works!!")
 	log.Printf("Listening: %s\n", SERVER)

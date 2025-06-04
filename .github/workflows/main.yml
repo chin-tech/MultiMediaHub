@@ -31,4 +31,4 @@ jobs:
 
       # (Optional) Step 5: Test Docker image
       - name: Run simple container test
-        run: docker run --rm ${{ secrets.DOCKER_USERNAME }}/test-app:latest echo "Container built successfully!"
+        run: docker run --rm ${{ secrets.DOCKER_USERNAME }}/test-app:latest test 
