@@ -23,6 +23,7 @@ func HomePage(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", HomePage)
+	log.Println("[+] Hope the pipeline works!")
 	log.Printf("Listening: %s\n", SERVER)
 	http.ListenAndServe(SERVER, nil)
 }
