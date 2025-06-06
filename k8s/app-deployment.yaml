@@ -16,12 +16,9 @@ spec:
       - name: dict-app
         image: phaze228/test-app:latest
         ports:
-        - containerPort: 9000
+        - containerPort: 80
         envFrom:
         - configMapRef:
               name: dict-config
         - secretRef:
               name: dict-secrets
-      imagePullSecrets:
-        - name: readcred
-          optional: true
