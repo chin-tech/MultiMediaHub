@@ -1,18 +1,28 @@
-version: '0.1'
 services:
-  webapp:
+  app:
     build: .
     ports:
-      - "9000:9000"
+      - "${PORT:-9001}:${PORT:-9001}"
     depends_on:
       - db
-  db:
-    image: postgres:13
     environment:
-      POSTGRES_DB: mediadb
-      POSTGRES_USER: user
-      POSTGREST_PASSWORD: password
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USER: ${DB_USER:-user}
+      DB_PASSWORD: ${DB_PASSWORD:-password}
+      DB_NAME: ${DB_NAME:-dictdb}
+      PORT: ${PORT:-9001}
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-dictdb}
+      POSTGRES_USER: ${DB_USER:-user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
     volumes:
-      - db_data:/var/lib/postgressql/data
+      - ./init:/docker-entrypoint-initdb.d
+      # - ./init:/var/lib/postgressql/data
+    ports:
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
 volumes:
   db_data:
