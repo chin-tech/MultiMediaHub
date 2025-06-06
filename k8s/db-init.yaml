@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  init.sql: |+
+    CREATE TABLE IF NOT EXISTS definitions (
+       id SERIAL PRIMARY KEY,
+       word TEXT not null,
+       definition TEXT not null
+    );
+
+
+    INSERT INTO definitions (word, definition) VALUES ('rawr', 'To roar like a lion');
+
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-06-06T07:07:26Z"
+  name: db-init
+  namespace: default
+  resourceVersion: "897"
+  uid: fc345f5d-beac-4230-8a61-cfa6b7a03b74

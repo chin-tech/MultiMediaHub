@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dict-app-d
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dict-app
+  template:
+    metadata:
+      labels:
+        app: dict-app
+    spec:
+      containers:
+      - name: dict-app
+        image: phaze228/test-app:latest
+        ports:
+        - containerPort: 9000
+        envFrom:
+        - configMapRef:
+              name: dict-config
+        - secretRef:
+              name: dict-secrets
+      imagePullSecrets:
+        - name: readcred
+          optional: true

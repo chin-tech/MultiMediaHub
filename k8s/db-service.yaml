@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dict-db-svc
+spec:
+  selector:
+    app: dict-db
+  ports:
+    - port: 5432
+      targetPort: 5432

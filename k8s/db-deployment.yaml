@@ -1,0 +1,38 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dict-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dict-db
+  template:
+    metadata:
+      labels:
+        app: dict-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "dictdb"
+        - name: POSTGRES_USER
+          value: "user"
+        - name: POSTGRES_PASSWORD
+          value: ${DB_PASSWORD}
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/postgresql/data
+        - name: init-script
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: db-data
+        emptyDir: {}
+      - name: init-script
+        configMap:
+          name: db-init

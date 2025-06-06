@@ -11,7 +11,7 @@ services:
       DB_USER: ${DB_USER:-user}
       DB_PASSWORD: ${DB_PASSWORD:-password}
       DB_NAME: ${DB_NAME:-dictdb}
-      PORT: ${PORT:-9001}
+      PORT: ${PORT:-80}
   db:
     image: postgres:15
     restart: always

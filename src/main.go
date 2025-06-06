@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	DEFAULT_PORT = "9000"
+	DEFAULT_PORT = "80"
 )
 
 var dbGlobal *sql.DB

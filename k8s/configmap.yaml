@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dict-config
+data:
+  DB_PORT: "5432"
+  DB_HOST: "dict-db-svc"
+  DB_USER: "user"
+  DB_NAME: "dictdb"
